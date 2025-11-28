@@ -52,7 +52,7 @@ with mlflow.start_run():
     model.compile(optimizer="adam", loss="mean_squared_error")
 
     # ==== Train ====
-    model.fit(X_train, y_train, epochs=20, batch_size=32, verbose=1)
+    model.fit(X_train, y_train, epochs=10, batch_size=32, verbose=1)
 
     # ==== Evaluation ====
     predictions = model.predict(X_test)
