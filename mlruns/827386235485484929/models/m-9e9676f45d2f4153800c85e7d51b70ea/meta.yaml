@@ -1,0 +1,10 @@
+artifact_location: /Users/mac/Desktop/Tugas-Sistem-ML/mlruns/827386235485484929/models/m-9e9676f45d2f4153800c85e7d51b70ea/artifacts
+creation_timestamp: 1764306215210
+experiment_id: '827386235485484929'
+last_updated_timestamp: 1764306221721
+model_id: m-9e9676f45d2f4153800c85e7d51b70ea
+model_type: null
+name: model
+source_run_id: d6fa3809d53043c3a7bae994aba767a0
+status: 2
+status_message: null
