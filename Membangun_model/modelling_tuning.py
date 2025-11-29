@@ -5,12 +5,14 @@ import math
 import mlflow
 import mlflow.keras
 from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import GridSearchCV
 
+import keras
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
 
 # ==== Load dataset ====
-df = pd.read_csv("aapl.us.txt_preprocessing.csv")
+df = pd.read_csv("Membangun_model/aapl.us.txt_preprocessing.csv")
 
 dataset = df["Close_norm"].values.reshape(-1, 1)
 
@@ -61,6 +63,8 @@ with mlflow.start_run():
     print("RMSE:", rmse)
 
     mlflow.log_metric("RMSE", rmse)
+    
+  
 
     # Log model (Keras)
     mlflow.keras.log_model(model, "model")
