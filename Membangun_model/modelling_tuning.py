@@ -5,7 +5,7 @@ import math
 import mlflow
 import mlflow.keras
 from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # tetap diimport karena kamu punya ini
 
 import keras
 from keras.models import Sequential
@@ -33,17 +33,20 @@ X_train, y_train = create_window(train_data)
 X_test,  y_test  = create_window(test_data)
 
 # === Reshape for LSTM ===
+# ensure shapes are correct: (samples, timesteps, features)
 X_train = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
 X_test  = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
 
 # ==== MLflow setup ====
-mlflow.set_tracking_uri("mlruns")
-mlflow.set_experiment("stock_prediction_lstm")
+
+mlflow.set_tracking_uri("https://dagshub.com/adityanugraha7251/Tugas-Sistem-ML.mlflow")
+mlflow.set_experiment("stock_prediction")
+
+# Use autolog so mlflow captures params/metrics/artifacts for keras automatically
+mlflow.autolog()
 
 with mlflow.start_run():
-    mlflow.autolog()
-
-    # ==== Build LSTM model ====
+    # Build LSTM model
     model = Sequential([
         LSTM(50, return_sequences=True, input_shape=(X_train.shape[1], 1)),
         LSTM(50, return_sequences=False),
@@ -53,18 +56,23 @@ with mlflow.start_run():
 
     model.compile(optimizer="adam", loss="mean_squared_error")
 
-    # ==== Train ====
-    model.fit(X_train, y_train, epochs=10, batch_size=32, verbose=1)
+    # Train
+    # you can tune epochs/batch_size below
+    epochs = 10
+    batch_size = 32
+    model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1)
 
-    # ==== Evaluation ====
+    # Evaluation
     predictions = model.predict(X_test)
     rmse = np.sqrt(mean_squared_error(y_test, predictions))
 
     print("RMSE:", rmse)
 
-    mlflow.log_metric("RMSE", rmse)
-    
-  
+    # Log RMSE explicitly (autolog already logs training info, but good to have)
+    mlflow.log_metric("RMSE", float(rmse))
 
-    # Log model (Keras)
+    # Log Keras model
     mlflow.keras.log_model(model, "model")
+
+
+
