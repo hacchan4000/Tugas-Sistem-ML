@@ -3,7 +3,7 @@ import mlflow
 import numpy as np
 
 # Load model dari MLflow
-model = mlflow.keras.load_model("mlruns/0/d6fa3809d53043c3a7bae994aba767a0/artifacts/model")
+model = mlflow.keras.load_model("mlruns/827386235485484929/d6fa3809d53043c3a7bae994aba767a0/artifacts/model")
 
 app = FastAPI()
 
