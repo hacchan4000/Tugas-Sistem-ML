@@ -5,7 +5,7 @@ import numpy as np
 import math
 from sklearn.svm import SVR
 
-df = pd.read_csv("aapl.us.txt_preprocessing.csv")
+df = pd.read_csv("Membangun_model/aapl.us.txt_preprocessing.csv")
 dataset = df["Close_norm"].values.reshape(-1, 1)
 
 def create_window(data, window_size=60):
@@ -21,6 +21,10 @@ test_data = dataset[training_data_len - 60:]
 
 X_train, y_train = create_window(train_data, 60)
 X_test, y_test = create_window(test_data, 60)
+
+
+mlflow.set_experiment('stock_prediction')
+mlflow.set_tracking_uri('mlruns')
 
 mlflow.autolog()
 
