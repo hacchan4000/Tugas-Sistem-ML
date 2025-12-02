@@ -44,5 +44,7 @@ with mlflow.start_run():
     # ==== Evaluation ====
     predictions = model.predict(X_test)
     rmse = np.sqrt(mean_squared_error(y_test, predictions))
+    
+    #bismilah bsa
 
    
