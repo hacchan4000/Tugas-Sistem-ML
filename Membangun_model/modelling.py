@@ -45,8 +45,4 @@ with mlflow.start_run():
     predictions = model.predict(X_test)
     rmse = np.sqrt(mean_squared_error(y_test, predictions))
 
-    print("RMSE:", rmse)
-
-    mlflow.log_metric("RMSE", rmse)
-
-    mlflow.sklearn.log_model(model, "model")
+   
