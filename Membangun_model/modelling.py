@@ -33,5 +33,17 @@ model = SVR(kernel="rbf", C=100, gamma=0.1)
 
 model.fit(X_train, y_train)
 
-predict_score = model.score(X_test, y_test)
+score = model.score(X_test, y_test)
+mlflow.log_metric("test_score", float(score))
+
+# Explicitly log model artifact (autolog often does this; this ensures a named artifact path)
+mlflow.sklearn.log_model(model, artifact_path="model")
+
+# Print helpful info for serving
+run_id = mlflow.active_run().info.run_id
+model_uri = f"runs:/{run_id}/model"
+print("Training finished.")
+print("MLflow run_id:", run_id)
+print("Model artifact URI:", model_uri)
+
 print("done")
