@@ -24,7 +24,7 @@ X_test, y_test = create_window(test_data, 60)
 
 
 mlflow.set_experiment('stock_prediction')
-mlflow.set_tracking_uri('mlruns')
+mlflow.set_tracking_uri("http://127.0.0.1:5000/")
 
 mlflow.autolog()
 
@@ -40,10 +40,5 @@ mlflow.log_metric("test_score", float(score))
 mlflow.sklearn.log_model(model, artifact_path="model")
 
 # Print helpful info for serving
-run_id = mlflow.active_run().info.run_id
-model_uri = f"runs:/{run_id}/model"
-print("Training finished.")
-print("MLflow run_id:", run_id)
-print("Model artifact URI:", model_uri)
 
 print("done")
