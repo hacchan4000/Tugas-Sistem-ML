@@ -2,7 +2,7 @@ venv/
 __pycache__/
 mlruns/
 prometheus-3.7.3.darwin-amd64/
-grafana-11.1.0/
+grafana-v11.1.0/
 model.pkl
 *.h5
 *.dylib
