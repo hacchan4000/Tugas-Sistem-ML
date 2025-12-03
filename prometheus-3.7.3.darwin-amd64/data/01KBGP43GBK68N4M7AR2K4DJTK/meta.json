@@ -1,0 +1,18 @@
+{
+	"ulid": "01KBGP43GBK68N4M7AR2K4DJTK",
+	"minTime": 1764706423915,
+	"maxTime": 1764712800000,
+	"stats": {
+		"numSamples": 374,
+		"numFloatSamples": 374,
+		"numSeries": 17,
+		"numChunks": 17
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01KBGP43GBK68N4M7AR2K4DJTK"
+		]
+	},
+	"version": 1
+}
